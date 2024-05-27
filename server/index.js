@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const dotenv = require("dotenv");
 
-const port = 2000;
+dotenv.config();
+
+const port = process.env.port;
 
 app.use(express.json());
 
@@ -18,9 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 mongoose
-  .connect(
-    "mongodb+srv://sumit:sumit@cluster0.zbvhxl2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(process.env.mongo)
   .then(() => {
     console.log("mongo connected successfully |");
   })
